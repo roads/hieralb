@@ -28,7 +28,7 @@ local machine for development and testing purposes.
 3. Place domain images, organized using folders with corresponding class names 
 inside the images folder (folder names will become the literal class names).
 4. To create the appropriate domain files run: 
-    $ python create_album_files.py <my_album_folder>
+   ``$ python create_album_files.py <my_album_folder>``
 
 Installation
 ------------
