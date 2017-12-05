@@ -23,12 +23,10 @@ Getting Started
 These instructions will get you a copy of the project up and running on your 
 local machine for development and testing purposes.
 
-1. Create a new folder <my_album_folder>.
-2. Create the folder “images” inside <my_album_folder>.
-3. Place domain images, organized using folders with corresponding class names 
-inside the images folder (folder names will become the literal class names).
-4. To create the appropriate domain files run: 
-   ``$ python create_album_files.py <my_album_folder>``
+   1. Create a new folder <my_album_folder>.
+   2. Create the folder “images” inside <my_album_folder>.
+   3. Place domain images, organized using folders with corresponding class names inside the images folder (folder names will become the literal class names).
+   4. To create the appropriate domain files run: ``$ python create_album_files.py <my_album_folder>``
 
 Installation
 ------------
