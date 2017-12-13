@@ -4,124 +4,109 @@ Hieralb: Hierarchical Album
 
 A niche package
 ---------------
-Hieralb is composed of a small set of Python functions that implement a 
+Hieralb is composed of a small set of Python functions that implement a
 consistent identification scheme for images used in visual categorization. In
 this package, a collection of images is referred to as an *album*. Within an
-album, a given image can often be categorized at multiple levels (e.g., bird, 
-kingfisher, ringed kingfisher) creating a hierarchy of images. In many 
-applications, it is desirable to consider these different levels of 
+album, a given image can often be categorized at multiple levels (e.g., bird,
+kingfisher, ringed kingfisher) creating a hierarchy of categories. In many
+applications, it is desirable to consider these different levels of
 categorization. Hieralb enables you to easily generate unique *image IDs* and
 *class IDs* for all possible categories. Hieralb generates a set of plain text
-files that specify the relationship between the actual images, image IDs and 
+files that specify the relationship between the actual images, image IDs and
 class IDs. Lastly, Hieralb provides a Python class so that the album's
 structural relationships and ID's can easily be used in other Python
-applications. 
+applications.
 
 Getting Started
 ---------------
 
-These instructions will get you a copy of the project up and running on your 
-local machine for development and testing purposes.
+These instructions provide a guick overview of what you need to do to get
+started. More detailed instructions can be found below.
 
-   1. Create a new folder <my_album_folder>.
-   2. Create the folder “images” inside <my_album_folder>.
-   3. Place domain images, organized using folders with corresponding class names inside the images folder (folder names will become the literal class names).
-   4. To create the appropriate domain files run:``$ python create_album_files.py <my_album_folder>``
+   1. Create a new folder ``<my_album_folder>``.
+   2. Create the folder ``images`` inside ``<my_album_folder>``.
+   3. Inside ``images``, create appropriately named folders. The folder names will become the literal class names.
+   4. Place all of your images in the appropriate folders.
+   5. To create the appropriate album files run:``$ python create_album_files.py <my_album_folder> <my_album_prefix>``
 
 Installation
 ------------
+TODO
 
 
-Detailed introduction
+Detailed instructions
 ---------------------
-This file covers the creation and management of domain directories for use in 
-applications that require organized image databases. The core organization 
-principle is that an image can be classified at different levels. 
+This file covers the creation and management of domain directories for use in
+applications that require organized image databases. The core organization
+principle is that an image can be classified at different levels.
 Classification levels are modeled using a hierarchical folder structure.
 
-For example, consider a domain containing bird images. The bird directory 
-might be organized in the following way:
+For example, consider an album containing bird images. Let's call this album
+birds-9, since there are nine different species. Let us also assume that we want
+to capture two different levels of categorization: the *taxonomic family* and
+*taxonomic species*. The bird directory might be organized in the following way:
 
-images/-+
-	|
-	+- bird/ —----+
-			|
-			+- Parulidae/ -	-+- Bobolink/
-			|		 +- Hooded_Oriole/
-			|		 +- Scott_Oriole/
-			|		
-			+- Passeridae/	-+- Hooded_Warbler/
-			|		 +- Kentucky_Warbler/
-			|		 +- Magnolia Warbler/
-			|
-			+- Icteridae/ -	-+- Chipping_Sparrow/
-					 +- Fox_Sparrow/
-					 +- Harris_Sparrow/
+.. code-block:: bash
 
+  birds-9/
+  └── bird/
+      ├── Parulidae/
+      │   ├── Bobolink/
+      │   ├── Hooded_Oriole/
+      │   └── Scott_Oriole/
+      ├── Passeridae/
+      │   ├── Hooded_Warbler/
+      │   ├── Kentucky_Warbler/
+      │   └── Magnolia Warbler/
+      └── Icteridae/
+          ├── Chipping_Sparrow/
+          ├── Fox_Sparrow/
+          └── Harris_Sparrow/
 
-===============
- Created Files
-===============
-Once you run:
-    $ python create_album_files.py <my_album_folder>
+After arranging the ``image/`` directory to your satisfaction (with the actual
+images placed in the appropriate species folder), you can run:
+``$ python create_album_files.py birds-9 10000000``
 
-The domain directory will contain (at least) the following three files:
-    - classes.txt
-    - images.txt
-    - image_class0.txt
+After running the script, the album directory will contain (at least) the
+following three text files:
 
-If the domain directory is more than one level deep (i.e, it contains nested classes), then additional files will be created. These files will follow the the structure:
-    - class<n>_class<n+1>.txt
-    
+- classes.txt
+   - A file listing all the classes (from all hierarchical levels) along with
+     their corresponding class_id.
+   - The file is composed of two columns using a space delimeter: <class_id>
+     <class_name>
+   - The class_id begins at 0 for each album, thus the class ID is not
+     unique across albums.
+- images.txt
+   - A file listing all the images and their corresponding imag_id.
+   - The file is composed of two columns using a space delimeter:
+     <unqiue_image_id> <image_filename>
+   - The unique_image_id is constructed using a numerical prefix supplied by the
+     user (e.g., 10000000) which is added to a value starting at 1 (e.g.,
+     10000001, 10000002, 10000002, ...). By using a prefix, the unique_image_id
+     is unique across albums. Use the prefix "0" if you don't want to use a prefix.
+- image_class0.txt
+   - A file mapping each image to its finest-grained class.
+   - The file is composed of two columns using a space delimeter:
+     <unique_image_id> <class_id>
 
-=============
- classes.txt
-=============
-A file with two columns, with a space delimeter
-<class_id> <class_name>
-NOTE: The class_id begins at 1 for each domain, thus class id is not unique across domains. The class_name is written with underscores instead of spaces (e.g., Red-Winged_Blackbird). The classes.txt file contains the class names from all hierarchical levels.
+If the ``image/`` directory is more than one level deep (i.e, it contains nested
+classes), then additional files will be created. These files will follow the
+structure:
 
-============
- images.txt
-============
-A file with two columns, with a space delimeter
-<unqiue_image_id> <image_filename>
-NOTE: The unique_image_id is constructed using a unique prefix for each domain (e.g., 10000000) which is added to a value starting at 1 (e.g., 10000001, 10000002, 10000002, ...). By using a prefix, the unique_image_id is unique across domains.
-
-=================
- image_class0.txt
-=================
-A file with two columns, with a space delimeter. The two columns show the lowest mapping between image_id and class_id
-<unique_image_id> <class_id>
-
-=========================
- class<n>_class<n+1>.txt
-=========================
-A file with two columns, with a space delimeter. The two columns show the mapping between class_id <n> and class_id <n+1>
-<class_id> <class_id>
+- class<n>_class<n+1>.txt
+   - A file listing the mapping between a child class and its parent class.
+   - A file composed of two columns using a space delimeter: <child class_id>
+     <parent class_id>
 
 Conventions and assumptions
 ---------------------------
-- Requires Python 3
-- Name folders using the singular form within the “images” folder (e.g., use
-bird not birds)
-- Use underscore as a placeholder for whitespace (e.g., “Hooded_Warbler”, not 
-“Hooded Warbler”). No spaces can be used in folder or filenames.
+- Code has only been tested using Python 3
+- Folder names should be singular within the “images” folder (e.g., use
+bird not birds).
+- Use underscore as a placeholder for whitespace (e.g., “Hooded_Warbler”, not
+“Hooded Warbler”). Actual spaces can not be used in folder or filenames.
 - The depth of each leaf node (from the parent node) must be the same.
-
-Notes
------
-- If deploying images to a server in order to be used in a website, take note of 
-the image file sizes. If your application requires multiple images to be loaded
-quickly, large image file sizes will increase page loading time.
-- Depending on your OS, certain folder names may not be allowed making this
-package mostly useless.
-
-Installation
-------------
-
-Support
--------
 
 Versioning
 ----------
