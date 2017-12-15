@@ -18,5 +18,6 @@ setup(name='hieralb',
       author_email='brett.roads@gmail.com',
       license='MIT',
       packages=['hieralb'],
+      install_requires=['pathlib'],
       include_package_data=True,
       )

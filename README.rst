@@ -76,7 +76,8 @@ following three text files:
    - The file is composed of two columns using a space delimeter: <class_id>
      <class_name>
    - The class_id begins at 0 for each album, thus the class ID is not
-     unique across albums.
+     unique across albums. The root class in the directory tree is assigned
+     class_id 0.
 - images.txt
    - A file listing all the images and their corresponding imag_id.
    - The file is composed of two columns using a space delimeter:
@@ -89,15 +90,20 @@ following three text files:
    - A file mapping each image to its finest-grained class.
    - The file is composed of two columns using a space delimeter:
      <unique_image_id> <class_id>
+- class_class.txt
+   - A file listing the mapping between a child class and its parent class.
+   - A file composed of two columns using a space delimeter: <child class_id>
+     <parent class_id>
 
 If the ``image/`` directory is more than one level deep (i.e, it contains nested
 classes), then additional files will be created. These files will follow the
 structure:
 
 - class<n>_class<n+1>.txt
-   - A file listing the mapping between a child class and its parent class.
+   - A file listing the mapping between a class level n and its parent level n+1.
    - A file composed of two columns using a space delimeter: <child class_id>
      <parent class_id>
+   - Level zero starts at the deepest leaf node of the directory tree.
 
 Conventions and assumptions
 ---------------------------
