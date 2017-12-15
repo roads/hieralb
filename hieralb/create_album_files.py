@@ -68,10 +68,11 @@ def main():
 
         for dir_name, subdir_list, file_list in os.walk(str(album_image_path), topdown=True):
             # Found directory
-            dir_depth = len(Path(dir_name).parts) - start_depth
-            base = os.path.basename(os.path.normpath(dir_name))
+            dir_name = Path(dir_name)
+            dir_depth = len(dir_name.parts) - start_depth
+            base = dir_name.name
             if not base == 'images':
-                # Any directory encountered is a class
+                # Any directory encountered is a class.
                 s = "%d %s\n" % (class_id_counter, base)
                 classes_file.write(s)
 
@@ -87,7 +88,7 @@ def main():
                 for fname in file_list:
                     if not fname.startswith('.'):
                         # The image id and the actual image path starting after directory "images"
-                        s1 = "%d %s\n" % (image_id_counter, os.path.join(get_last_n_path(dir_name, dir_depth), fname))
+                        s1 = "%d %s\n" % (image_id_counter, dir_name.relative_to(album_image_path) / fname)
                         images_file.write(s1)
                         # Mapping from image_id to class_id
                         s2 = "%d %d\n" % (image_id_counter, class_id_counter)
@@ -117,13 +118,16 @@ def main():
 
 def listdir_nohidden(path):
     '''
-    List non-hidden files
+    Return non-hidden files.
     '''
     for f in os.listdir(path):
         if not f.startswith('.'):
             yield f
 
 def determine_max_depth(album_path):
+    '''
+    Return the maximum depth of a directory.
+    '''
     max_depth_found = 0
     start_depth = len(album_path.parts)
     for root, dirs, files in os.walk(str(album_path)):
@@ -132,13 +136,6 @@ def determine_max_depth(album_path):
         if depth > max_depth_found:
             max_depth_found = depth
     return max_depth_found
-
-def get_last_n_path(dir_name, N):
-    completed_path = ''
-    for index in range(N):
-        completed_path = os.path.join(os.path.split(dir_name)[1], completed_path)
-        dir_name = os.path.split(dir_name)[0]
-    return completed_path
 
 if __name__ == "__main__":
     main()
