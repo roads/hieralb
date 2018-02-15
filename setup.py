@@ -8,7 +8,7 @@ def readme():
         return f.read()
 
 setup(name='hieralb',
-      version='0.1.0',
+      version='0.1.1',
       description='Tools for managing hierarchical albums of images.',
       long_description=readme(),
       url='https://github.com/roads/hieralb',

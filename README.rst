@@ -19,7 +19,6 @@ applications.
 
 Getting Started
 ---------------
-
 These instructions provide a guick overview of what you need to do to get
 started. More detailed instructions can be found below.
 
@@ -31,8 +30,10 @@ started. More detailed instructions can be found below.
 
 Installation
 ------------
-TODO
+There are two ways to get Hieralb:
 
+   1. Install using pip: ``pip install hieralb``
+   2. Clone from Git Hub: https://github.com/roads/hieralb.git
 
 Detailed instructions
 ---------------------
