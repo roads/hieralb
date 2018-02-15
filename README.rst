@@ -17,7 +17,7 @@ class IDs. Lastly, Hieralb provides a Python class so that the album's
 structural relationships and ID's can easily be used in other Python
 applications.
 
-Getting Started
+Getting started
 ---------------
 These instructions provide a guick overview of what you need to do to get
 started. More detailed instructions can be found below.
@@ -106,11 +106,15 @@ structure:
      <parent class_id>
    - Level zero starts at the deepest leaf node of the directory tree.
 
+Once the appropriate files have been created, you can use the Album class to load 
+the data associated with an album into convenient python object. An album object 
+can be instantied by passing a string containing the path to album directory 
+(e.g., ``birds_9_album = Album('\birds-9')``). 
+
 Conventions and assumptions
 ---------------------------
 - Code has only been tested using Python 3
-- Folder names should be singular within the “images” folder (e.g., use
-bird not birds).
+- Folder names should be singular within the “images” folder (e.g., use bird not birds).
 - Use underscore as a placeholder for whitespace (e.g., “Hooded_Warbler”, not
 “Hooded Warbler”). Actual spaces can not be used in folder or filenames.
 - The depth of each leaf node (from the parent node) must be the same.
