@@ -108,8 +108,10 @@ structure:
 
 Once the appropriate files have been created, you can use the Album class to load 
 the data associated with an album into convenient python object. An album object 
-can be instantied by passing a string containing the path to album directory 
-(e.g., ``birds_9_album = Album('\birds-9')``). 
+can be instantied by importing passing a string containing the path to the album directory. 
+.. code-block:: python
+  from hieralb import Album
+  birds_9_album = Album('\birds-9')
 
 Conventions and assumptions
 ---------------------------
