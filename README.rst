@@ -130,7 +130,7 @@ This package folows the Semantic Versioning 2.0.0 rules (https://semver.org).
 Authors
 -------
 - Brett D. Roads
-See also the list of contributors who participated in this project.
+- See also the list of contributors who participated in this project.
 
 License
 -------
