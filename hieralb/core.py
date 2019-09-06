@@ -10,23 +10,23 @@ import pandas as pd
 from pathlib import Path
 import imageio
 
+
 class Album(object):
-    '''
-    Class that specifies a hierarchical album.
+    """Class that specifies a hierarchical album.
 
     The Album class has three primary attributes:
-      1. classes: A dictionary specifying the mapping between class ID's and a 
+      1. classes: A dictionary specifying the mapping between class ID's and a
          class label (i.e., a string literal).
-      
+
       2. class_class: A dictionary capturing the hierarchical relationships
          between the stimuli as a dictionary that specifies a map between a
          child class ID and a parent class ID.
-      
+
       3. stimuli: A Pandas DataFrame that has a row for each unique stimulus.
          The DataFrame includes the following columns:
            a) stimulus_id
            c) leaf_class_id
-           c) path    
+           c) path
 
     In addition, the Album class has the following additional attributes:
       - album_path
@@ -34,10 +34,10 @@ class Album(object):
       - n_class
       - has_image_files
       - image_files
-    
-    Actual image files can be loaded into the Album object by calling the 
+
+    Actual image files can be loaded into the Album object by calling the
     attach_image_files method.
-    '''
+    """
 
     def __init__(self, album_path):
 
@@ -50,17 +50,19 @@ class Album(object):
 
         # class_class dictionary
         self.class_class = self.__load_class_class()
-        
+
         # stimuli DataFrame
-        image_class0 = pd.read_csv(album_path / Path("image_class0.txt"), 
-        header=None, names=('stimulus_id', 'leaf_class_id'), delimiter=' ')
-        images = pd.read_csv(album_path / Path("images.txt"), header=None, 
-        names=('stimulus_id', 'path'), delimiter=' ')
-        stimuli = pd.merge( image_class0, images, on='stimulus_id')
+        image_class0 = pd.read_csv(
+            album_path / Path("image_class0.txt"), header=None,
+            names=('stimulus_id', 'leaf_class_id'), delimiter=' ')
+        images = pd.read_csv(
+            album_path / Path("images.txt"), header=None,
+            names=('stimulus_id', 'path'), delimiter=' ')
+        stimuli = pd.merge(image_class0, images, on='stimulus_id')
         # Convert path strings to pathlib Path objects
         stimuli['path'] = stimuli['path'].map(lambda x: Path(x))
         self.stimuli = stimuli
-        
+
         self.n_stimuli = len(stimuli)
         self.n_class = len(self.classes.keys())
         self.has_image_files = False

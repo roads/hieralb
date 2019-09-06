@@ -80,7 +80,7 @@ following three text files:
      unique across albums. The root class in the directory tree is assigned
      class_id 0.
 - images.txt
-   - A file listing all the images and their corresponding imag_id.
+   - A file listing all the images and their corresponding image_id.
    - The file is composed of two columns using a space delimeter:
      <unqiue_image_id> <image_filename>
    - The unique_image_id is constructed using a numerical prefix supplied by the
